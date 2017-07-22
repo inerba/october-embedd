@@ -1,0 +1,25 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    hint:
+        type: hint
+        path: $/inerba/embedd/models/settings/_hint.htm
+
+    googlemaps_api_key:
+        label: inerba.embedd::lang.settings.googlemaps_api_key.label
+        type: text
+        comment: inerba.embedd::lang.settings.googlemaps_api_key.comment
+
+    soundcloud_client_id:
+        label: inerba.embedd::lang.settings.soundcloud_client_id.label
+        type: text
+        comment: inerba.embedd::lang.settings.soundcloud_client_id.comment
+
+    facebook_access_token:
+        label: inerba.embedd::lang.settings.facebook_access_token.label
+        type: text
+        comment: inerba.embedd::lang.settings.facebook_access_token.comment
+
+    
