@@ -3,7 +3,7 @@
 return [
     'plugin' => [
         'name'         => 'Embedd',
-        'description'  => 'Provides easier-than-ever embedding.',
+        'description'  => 'Incorpora un contenuto in una pagina a partire dal suo URL.',
     ],
 
     'settings_menu' => [
@@ -32,5 +32,17 @@ return [
             'comment' => 'Facebook access token'
         ],
 
+    ],
+
+    'EmbedComponent' => [
+        'url' => [
+            'title' => 'Url',
+            'description' => 'Indirizzo url del contenuto da incorporare'
+        ],
+        'cache' => [
+            'title' => 'Cache in minuti',
+            'description' => 'Durata della cache in minuti',
+            'validationMessage' => 'Puoi inserirre solo numeri',
+        ],
     ],
 ];

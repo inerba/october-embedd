@@ -3,6 +3,7 @@
 use Cache;
 use Embed\Embed;
 use Cms\Classes\ComponentBase;
+use Inerba\Embedd\Models\Settings;
 
 class EmbedComponent extends ComponentBase
 {
@@ -18,15 +19,15 @@ class EmbedComponent extends ComponentBase
     {
         return [
             'url' => [
-                'title'             => 'Url',
-                'description'       => 'Url da embeddare',
+                'title'             => 'inerba.embedd::lang.EmbedComponent.url.title',
+                'description'       => 'inerba.embedd::lang.EmbedComponent.url.description',
                 'type'              => 'string',
             ],
             'cache' => [
-                'title'             => 'Cache in minuti',
-                'description'       => 'Durata della cache in minuti, 0 per non usare la cache',
+                'title'             => 'inerba.embedd::lang.EmbedComponent.cache.title',
+                'description'       => 'inerba.embedd::lang.EmbedComponent.cache.description',
                 'validationPattern' => '^[0-9]+$',
-                'validationMessage' => 'Please enter only numbers',
+                'validationMessage' => 'inerba.embedd::lang.EmbedComponent.cache.validationMessage',
                 'default'           => '1440',
                 'type'              => 'string',
             ],
@@ -39,8 +40,6 @@ class EmbedComponent extends ComponentBase
         dd($this->retrieve(),microtime(true) - $start);*/
 
         $e = $this->retrieve();
-
-        dd($e);
 
         if(!is_object($e)){
             // ERRORE
@@ -60,7 +59,8 @@ class EmbedComponent extends ComponentBase
 
         $embed = Cache::remember(str_slug($url), $cache_duration, function() use($url) {
             try {
-                $info = Embed::create($url);
+
+                $info = $this->init_embed($url);
 
                 $embed_array = [
                     'title' => $info->title, //The page title
@@ -93,7 +93,8 @@ class EmbedComponent extends ComponentBase
                     
                 ];
 
-                return $embed_array;
+                return (object) $embed_array;
+
             } catch (\Exception $e) {
                 // ERRORE
                 return $e->getMessage();
@@ -114,5 +115,21 @@ class EmbedComponent extends ComponentBase
         }
 
         return false;
+    }
+
+    private function init_embed($url)
+    {
+        $settings = [
+            'google' => [
+                'key' => Settings::get('googlemaps_api_key', null),
+            ],
+            'soundcloud' => [
+                'key' => Settings::get('soundcloud_client_id', null),
+            ],
+            'facebook' => [
+                'key' => Settings::get('facebook_access_token', null),
+            ],
+        ];
+        return Embed::create($url, $settings);
     }
 }
