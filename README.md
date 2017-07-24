@@ -48,7 +48,7 @@ Per utilizzare questo form widget bisogna attuare qualche accorgimento:
 	public function beforeSave()
     {
         $Embedd = new Embedd();
-	$info = $Embedd->retrieve($this->embedd['url']);
+	    $info = $Embedd->retrieve($this->embedd['url']);
         $this->embedd = $info;
 
     }
