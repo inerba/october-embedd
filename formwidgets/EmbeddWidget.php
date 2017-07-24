@@ -3,7 +3,6 @@
 use Backend\Classes\FormWidgetBase;
 use Inerba\Embedd\Classes\Embedd;
 use Cms\Classes\Controller;
-use Embed\Embed;
 
 /**
  * Embedd Form Widget
@@ -13,7 +12,7 @@ class EmbeddWidget extends FormWidgetBase
     /**
      * @inheritDoc
      */
-    protected $defaultAlias = 'inerba_embedd_widget';
+    protected $defaultAlias = 'embedd';
 
     /**
      * @inheritDoc
@@ -36,8 +35,15 @@ class EmbeddWidget extends FormWidgetBase
      */
     public function prepareVars()
     {
+        $value = $this->getLoadValue();
+
+        if(isset($value['url'])) {
+            $this->vars['value'] = $value['url'];
+        } else {
+            $this->vars['value'] = null;
+        }
+
         $this->vars['name'] = $this->formField->getName();
-        $this->vars['value'] = $this->getLoadValue();
         $this->vars['model'] = $this->model;
         $this->vars['form'] = $this;
 
