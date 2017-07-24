@@ -31,7 +31,7 @@ Per utilizzare questo form widget bisogna attuare qualche accorgimento:
  - il campo del database che ospiterà i dati del form widget deve essere di tipo TEXT e nel *Model* deve essere indicato come *jsonable* ` protected $jsonable = ['embedd'];`
  
  - nel file `fields.yaml` del model, oltre ad indicare `type:embedd` bisogna che lélemento faccia riferimento all'url dell'array che andremo a salvare 
-	``` yaml	 
+	``` 	 
 	'embed[url]':
 		label: 'Contenuto incorporato'
 	    span: full
