@@ -1,6 +1,7 @@
 <?php namespace Inerba\Embedd\FormWidgets;
 
 use Backend\Classes\FormWidgetBase;
+use Inerba\Embedd\Classes\Embedd;
 use Cms\Classes\Controller;
 use Embed\Embed;
 
@@ -47,8 +48,8 @@ class EmbeddWidget extends FormWidgetBase
      */
     public function loadAssets()
     {
-        $this->addCss('css/extractmedia.css', 'Inerba.PostExtras');
-        $this->addJs('js/extractmedia.js', 'Inerba.PostExtras');
+        $this->addCss('css/extractmedia.css', 'Inerba.Embedd');
+        $this->addJs('js/extractmedia.js', 'Inerba.Embedd');
     }
 
     /**
@@ -60,27 +61,22 @@ class EmbeddWidget extends FormWidgetBase
 
         if( !empty($media_url) ) {
 
-            $Essence = new Essence();
-            $media = $Essence->extract($media_url);
+            $Embedd = new Embedd();
+            $media = $Embedd->retrieve($media_url);
 
-            //dd($model->attributes);
-
-            if($media) {
-                $value = $media->properties();
+            if($media->code) {
+                $value = $media;
             }
         }
-
         return $value;
     }
 
     public function onExtractMedia(){
-        /*dump($this);
-        exit;*/
-        $formFieldValue = post($this->formField->getName());
+        $formFieldValue = post(post('embedd_name'));
         $media = $this->ExtractMedia($formFieldValue);
 
-        if(isset($media['html'])){
-            return $this->vars['media'] = $media['html'];
+        if(isset($media->code)){
+            return $this->vars['media'] = $media->code;
         }
         return $this->vars['media'] = false;
     }
@@ -90,18 +86,11 @@ class EmbeddWidget extends FormWidgetBase
 
         if( !empty($media_url) ) {
 
-            $Essence = new Essence();
-            $options = [
-                //'maxwidth' => '1980',
-                //'maxheight' => '768'
-            ];
-            $media = $Essence->extract($media_url,$options);
-
-            //dd($model->attributes);
+            $Embedd = new Embedd();
+            $media = $Embedd->retrieve($media_url);
 
             if($media) {
-                //$this->attrib['media'] = $media->properties();
-                $value = $media->properties();
+                $value = $media;
             }
         }
 

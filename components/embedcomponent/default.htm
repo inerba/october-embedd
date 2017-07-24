@@ -1,5 +1,5 @@
 {% if provider_partial %}
-	{% partial __SELF__ ~ '::' ~ 'provider/' ~ provider_partial %}
+	{% partial __SELF__ ~ '::' ~ 'provider/' ~ provider_partial %} 
 {% else %}
 	<div class="alert alert-warning text-center" role="alert">Vista parziale <em>{{ str_slug(embed.providerName) }}</em> non trovata</div>
 	{{ embed.code | raw }}
