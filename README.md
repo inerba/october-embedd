@@ -33,7 +33,7 @@ Per utilizzare questo form widget bisogna attuare qualche accorgimento:
  - nel file `fields.yaml` del model, oltre ad indicare `type:embedd` bisogna che lélemento faccia riferimento all'url dell'array che andremo a salvare 
 	``` 	 
 	'embed[url]':
-		label: 'Contenuto incorporato'
+	    label: 'Contenuto incorporato'
 	    span: full
 	    type: embedd
 	```
