@@ -95,6 +95,15 @@ class Plugin extends PluginBase
         ];
     }
 
+    public function registerMarkupTags()
+    {
+        return [
+            'functions' => [
+                'embedd'       => ['Inerba\Embedd\Classes\Embedd', 'embedd'],
+            ]
+        ];
+    }
+
     public function registerPermissions()
     {
         return [
